@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series 2 - Artist Portfolio</title>
+    <title>APPARIZIONI - Artist Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -20,20 +20,106 @@
     <!-- Series Detail Section -->
     <section class="detail-section">
         <div class="detail-container">
-            <h1 class="detail-title">Series 2</h1>
-            <p class="detail-description">This series explores...</p>
-            
-            <!-- Gallery will be added here -->
+            <h1 class="detail-title">APPARIZIONI</h1>
+            <p class="detail-description">
+                2021<br>
+                Serie di dipinti a olio su tela, 30×25 cm. Piccole apparizioni sospese,
+                che emergono silenziosamente dallo sfondo e si offrono allo sguardo
+                come presenze intime e fugaci.
+            </p>
+
             <div class="detail-gallery">
-                <!-- Add artwork images here -->
+                <div class="gallery-item">
+                    <img src="images/series/apparizioni/apparizioni1.jpg"
+                         alt="APPARIZIONI – 2021, olio su tela, 30×25 cm (1)"
+                         class="gallery-image"
+                         data-width="30" data-height="25"
+                         style="width: 360px; height: auto;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/series/apparizioni/apparizioni2.jpg"
+                         alt="APPARIZIONI – 2021, olio su tela, 30×25 cm (2)"
+                         class="gallery-image"
+                         data-width="30" data-height="25"
+                         style="width: 360px; height: auto;">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/series/apparizioni/apparizioni3.jpg"
+                         alt="APPARIZIONI – 2021, olio su tela, 30×25 cm (3)"
+                         class="gallery-image"
+                         data-width="30" data-height="25"
+                         style="width: 360px; height: auto;">
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Lightbox Modal (same behaviour as homepage gallery) -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>
+            <div class="lightbox-body" id="lightboxBody"></div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Artist Name. All rights reserved.</p>
+        <p>&copy; 2025 Cinzia Brena. All rights reserved;</p>
     </footer>
+    
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxBody = document.getElementById('lightboxBody');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function openLightbox(item) {
+            lightboxBody.innerHTML = '';
+
+            const imageEl = item.querySelector('img.gallery-image');
+            const placeholderEl = item.querySelector('.placeholder-image');
+            let content;
+
+            if (imageEl) {
+                content = imageEl.cloneNode(true);
+                content.classList.add('lightbox-media');
+            } else if (placeholderEl) {
+                content = placeholderEl.cloneNode(true);
+                content.classList.add('lightbox-placeholder');
+            }
+
+            if (!content) return;
+
+            lightboxBody.appendChild(content);
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxBody.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openLightbox(item));
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        lightboxBody.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Series 4 - Artist Portfolio</title>
+    <title>L'IMMAGINE NEGATA - Artist Portfolio</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -20,20 +20,102 @@
     <!-- Series Detail Section -->
     <section class="detail-section">
         <div class="detail-container">
-            <h1 class="detail-title">Series 4</h1>
-            <p class="detail-description">This series explores...</p>
-            
-            <!-- Gallery will be added here -->
+            <h1 class="detail-title">L'IMMAGINE NEGATA</h1>
+            <p class="detail-description">
+                Dal 2021<br>
+                Serie in progress, olio e acrilico su tela. Il tema è quello della
+                limitazione della fruizione dell'immagine: un velo di colore piatto
+                e artificiale copre il dipinto, ma non ne annulla il potenziale,
+                mettendo in moto un processo di interrogazione e ricerca.
+            </p>
+
             <div class="detail-gallery">
-                <!-- Add artwork images here -->
+                <div class="gallery-item">
+                    <img src="images/series/immagine_negata/negata1.jpg"
+                         alt="Amelia, olio su tela, 2021, 24×30 cm"
+                         class="gallery-image"
+                         data-width="24" data-height="30"
+                         style="width: 288px; height: auto;">
+                    <p class="detail-image-caption">Amelia, olio su tela, anno 2021, 24×30 cm</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/series/immagine_negata/negata2.jpg"
+                         alt="Dalla finestra, olio su tela, 2022, 30×20 cm"
+                         class="gallery-image"
+                         data-width="30" data-height="20"
+                         style="width: 360px; height: auto;">
+                    <p class="detail-image-caption">Dalla finestra, olio su tela, anno 2022, 30×20 cm</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Lightbox Modal (same behaviour as homepage gallery) -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" type="button" aria-label="Close enlarged image">&times;</button>
+            <div class="lightbox-body" id="lightboxBody"></div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2024 Artist Name. All rights reserved.</p>
+        <p>&copy; 2025 Cinzia Brena. All rights reserved.</p>
     </footer>
+    
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxBody = document.getElementById('lightboxBody');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function openLightbox(item) {
+            lightboxBody.innerHTML = '';
+
+            const imageEl = item.querySelector('img.gallery-image');
+            const placeholderEl = item.querySelector('.placeholder-image');
+            let content;
+
+            if (imageEl) {
+                content = imageEl.cloneNode(true);
+                content.classList.add('lightbox-media');
+            } else if (placeholderEl) {
+                content = placeholderEl.cloneNode(true);
+                content.classList.add('lightbox-placeholder');
+            }
+
+            if (!content) return;
+
+            lightboxBody.appendChild(content);
+            lightbox.classList.add('open');
+            lightbox.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxBody.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => openLightbox(item));
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        lightboxBody.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && lightbox.classList.contains('open')) {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
 
