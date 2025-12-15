@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Me - Artist Portfolio</title>
+    <title>Contattami - Portfolio dell'artista</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,17 +11,17 @@
     <nav class="navigation">
         <div class="nav-container">
             <a href="index.html" class="nav-link">Home</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="gallery.html" class="nav-link">Gallery</a>
-            <a href="contact.html" class="nav-link active">Contact</a>
+            <a href="about.html" class="nav-link">Chi sono</a>
+            <a href="gallery.html" class="nav-link">Portfolio</a>
+            <a href="contact.html" class="nav-link active">Contatti</a>
         </div>
     </nav>
 
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="contact-container">
-            <h1 class="contact-title">Contact Me</h1>
-            <p class="contact-subtitle">Get in touch with me for commissions, collaborations, or inquiries.</p>
+            <h1 class="contact-title">Contattami</h1>
+            <p class="contact-subtitle">Scrivimi per commissioni, collaborazioni o qualsiasi richiesta.</p>
             
             <!-- 
                 Netlify Forms - No setup required!
@@ -36,27 +36,27 @@
                 </p>
                 
                 <div class="form-group">
-                    <label for="email" class="form-label">Your Email</label>
-                    <input type="email" id="email" name="email" class="form-input" required placeholder="your.email@example.com">
+                    <label for="email" class="form-label">La tua email</label>
+                    <input type="email" id="email" name="email" class="form-input" required placeholder="tua.email@esempio.com">
                 </div>
 
                 <div class="form-group">
-                    <label for="title" class="form-label">Subject</label>
-                    <input type="text" id="title" name="title" class="form-input" required placeholder="Message subject">
+                    <label for="title" class="form-label">Oggetto</label>
+                    <input type="text" id="title" name="title" class="form-input" required placeholder="Oggetto del messaggio">
                 </div>
 
                 <div class="form-group">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea id="message" name="message" class="form-textarea" rows="6" required placeholder="Your message here..."></textarea>
+                    <label for="message" class="form-label">Messaggio</label>
+                    <textarea id="message" name="message" class="form-textarea" rows="6" required placeholder="Scrivi qui il tuo messaggio..."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="attachment" class="form-label">Attachments (Optional)</label>
+                    <label for="attachment" class="form-label">Allegati (facoltativo)</label>
                     <input type="file" id="attachment" name="attachment" class="form-file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif">
-                    <small class="form-help">You can attach multiple files. Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF</small>
+                    <small class="form-help">Puoi allegare più file. Formati accettati: PDF, DOC, DOCX, JPG, PNG, GIF.</small>
                 </div>
 
-                <button type="submit" class="form-submit">Send Message</button>
+                <button type="submit" class="form-submit">Invia messaggio</button>
                 
                 <div class="form-message" id="formMessage"></div>
             </form>
@@ -81,7 +81,7 @@
             
             // Disable button and show loading state
             submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
+            submitButton.textContent = 'Invio in corso...';
             formMessage.textContent = '';
             formMessage.className = 'form-message';
 
@@ -95,15 +95,15 @@
                 });
 
                 if (response.ok) {
-                    formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                    formMessage.textContent = 'Grazie! Il tuo messaggio è stato inviato con successo.';
                     formMessage.className = 'form-message success';
                     form.reset();
                 } else {
-                    formMessage.textContent = 'Oops! There was a problem sending your message. Please try again.';
+                    formMessage.textContent = 'Si è verificato un problema durante l\'invio del messaggio. Riprova, per favore.';
                     formMessage.className = 'form-message error';
                 }
             } catch (error) {
-                formMessage.textContent = 'Oops! There was a problem sending your message. Please try again.';
+                formMessage.textContent = 'Si è verificato un problema durante l\'invio del messaggio. Riprova, per favore.';
                 formMessage.className = 'form-message error';
             } finally {
                 submitButton.disabled = false;
