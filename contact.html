@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - Artist Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link active">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <h1 class="contact-title">Contact Me</h1>
+            <p class="contact-subtitle">Get in touch with me for commissions, collaborations, or inquiries.</p>
+            
+            <!-- 
+                Netlify Forms - No setup required!
+                This form will automatically work when deployed to Netlify.
+                Just add the netlify attribute to enable form processing.
+            -->
+            <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+                <!-- Hidden field for spam protection -->
+                <input type="hidden" name="form-name" value="contact">
+                <p style="display: none;">
+                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Your Email</label>
+                    <input type="email" id="email" name="email" class="form-input" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="title" class="form-label">Subject</label>
+                    <input type="text" id="title" name="title" class="form-input" required placeholder="Message subject">
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" name="message" class="form-textarea" rows="6" required placeholder="Your message here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="attachment" class="form-label">Attachments (Optional)</label>
+                    <input type="file" id="attachment" name="attachment" class="form-file" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif">
+                    <small class="form-help">You can attach multiple files. Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF</small>
+                </div>
+
+                <button type="submit" class="form-submit">Send Message</button>
+                
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Artist Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Netlify Forms submission handling
+        const form = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitButton = form.querySelector('.form-submit');
+            const originalText = submitButton.textContent;
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            formMessage.textContent = '';
+            formMessage.className = 'form-message';
+
+            try {
+                const formData = new FormData(form);
+                
+                // Submit to Netlify Forms endpoint
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                    formMessage.className = 'form-message success';
+                    form.reset();
+                } else {
+                    formMessage.textContent = 'Oops! There was a problem sending your message. Please try again.';
+                    formMessage.className = 'form-message error';
+                }
+            } catch (error) {
+                formMessage.textContent = 'Oops! There was a problem sending your message. Please try again.';
+                formMessage.className = 'form-message error';
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        });
+    </script>
+</body>
+</html>
+

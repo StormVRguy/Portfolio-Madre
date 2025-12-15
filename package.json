@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-madre",
+  "version": "1.0.0",
+  "description": "Artist portfolio website",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx http-server -p 8080 -o"
+  },
+  "keywords": ["portfolio", "artist"],
+  "author": "",
+  "license": "MIT"
+}
+

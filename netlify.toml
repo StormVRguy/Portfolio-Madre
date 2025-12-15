@@ -1,0 +1,16 @@
+[build]
+  # No build command needed for static site
+  publish = "."
+
+[[redirects]]
+  # Handle client-side routing if needed in the future
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Form settings
+[build.environment]
+  # Enable Netlify Forms processing
+  NETLIFY = "true"
+
